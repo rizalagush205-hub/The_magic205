@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0284c7">
- <title>THE_MAGIC205 - Musik</title>
+<title>THE_MAGIC205 - Musik</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -22,17 +22,14 @@ body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0
 .search-input{flex:1;padding:10px 12px;border-radius:10px;border:none;background:#1e293b;color:#fff;font-size:12px;outline:none;font-family:'Poppins'}
 .search-btn{width:40px;height:40px;border-radius:10px;border:none;background:#2563eb;color:#fff;font-size:16px;cursor:pointer}
 #hasilLagu{max-height:380px;overflow-y:auto;margin-bottom:12px;text-align:left;padding-right:4px;}
-
 #hasilLagu::-webkit-scrollbar, .popup::-webkit-scrollbar { width: 6px; }
 #hasilLagu::-webkit-scrollbar-thumb, .popup::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-
 .menu-toggle{position:fixed;top:12px;left:12px;background:#0f172a;color:white;font-size:20px;width:44px;height:44px;border-radius:12px;cursor:pointer;z-index:999;display:flex;align-items:center;justify-content:center;border:none;}
 .menu-list{position:fixed;top:62px;left:12px;background:rgba(15, 23, 42, 0.95);backdrop-filter:blur(8px);padding:6px;border-radius:12px;width:160px;display:none;z-index:998;box-shadow:0 10px 25px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05)}
 .menu-list.show{display:block}
 .menu-list a{display:block;color:#e2e8f0;text-decoration:none;padding:10px;margin:2px 0;font-size:13px;border-radius:8px;cursor:pointer;font-weight:600}
 .menu-list a:hover{background:rgba(255,255,255,0.08);}
 .btn-home{position:fixed;top:12px;right:12px;background:#2563eb;color:white;font-size:18px;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:999;display:none;align-items:center;justify-content:center;border:none}
-
 .popup{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,#0284c7 0%,#0ea5e9 25%,#38bdf8 60%,#e0f2fe 100%);z-index:1001;overflow-y:auto;padding:24px 16px;display:none;justify-content:center;align-items:flex-start;background-attachment:fixed}
 .popup.show{display:flex}
 .popup.bg-dark { background: #0f172a !important; }
@@ -41,12 +38,10 @@ body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0
 .popup-content-general h2 {text-align:center; margin-bottom:4px; font-size:26px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.15);}
 .popup-content-general p {text-align:center; color:#e0f2fe; font-size:13px; margin-bottom:24px; font-weight: 500;}
 .bg-dark .popup-content-general p { color: #94a3b8; }
-
 .btn-kembali-gray{padding:14px 20px;background:#1e293b;border-radius:14px;font-size:14px;color:#fff;border:none;cursor:pointer;font-weight:600;margin-top:24px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: background 0.2s;}
 .btn-kembali-gray:hover { background: #334155; }
 .bg-dark .btn-kembali-gray { background: #2563eb; }
 .bg-dark .btn-kembali-gray:hover { background: #1d4ed8; }
-
 .player-item-new {background: transparent;padding: 16px 0;margin-bottom: 8px;position: relative;border-bottom: 1px solid rgba(255, 255, 255, 0.2);}
 .player-item-new:last-child { border-bottom: none; }
 .player-main-row { display: flex; align-items: flex-start; gap: 14px; }
@@ -65,7 +60,6 @@ body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0
 .btn-down-icon {padding: 0 14px; height: 36px; border-radius: 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);color: #cbd5e1; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; transition: background 0.2s;}
 .popup:not(.bg-dark) .btn-down-icon { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.25); color: #fff; }
 .btn-down-icon:hover { background: rgba(255, 255, 255, 0.15); }
-
 .sosmed-list { display: flex; flex-direction: column; gap: 12px; margin: 16px 0 20px; }
 .sosmed-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-radius: 16px; color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; transition: transform 0.2s, filter 0.2s, box-shadow 0.2s; border: 1px solid rgba(255, 255, 255, 0.1); }
 .sosmed-item div { display: flex; align-items: center; gap: 12px; }
@@ -122,11 +116,6 @@ let daftarLagu = [
 
 let audioNow = new Audio();
 let currentIdx = -1;
-
-audioNow.onplay = () => setTimeout(updateAllList, 100);
-audioNow.onpause = () => setTimeout(updateAllList, 100);
-audioNow.onended = () => { putarLaguBerikutnya(); };
-window.onload = function(){ cariLagu('main'); }
 
 function goHome(){ 
   let popupDiv = document.getElementById('popup');
@@ -193,7 +182,16 @@ function bukaDaftarLagu(){
 }
 
 function bukaTentang(){ showPopup(`<div class="popup-content-general"><h2>Tentang</h2><p>THE_MAGIC205 - Musik AI Independen</p><button class="btn-kembali-gray" onclick="goHome()">Kembali</button></div>`); }
-function bukaSawer(){ showPopup(`<div class="popup-content-general"><h2>☕ Sawer</h2><p>Terima kasih dukungannya!</p><button class="btn-kembali-gray" onclick="goHome()">Kembali</button></div>`); }
+
+function bukaSawer(){ 
+  showPopup(`<div class="popup-content-general">
+    <h2>☕ Sawer</h2>
+    <p>Terima kasih dukungannya!</p>
+    <img src="gopay-qr.jpg" style="width: 100%; border-radius: 12px; margin-bottom: 10px; border: 3px solid #00AA13;">
+    <p style="font-size: 12px; color: #fff; text-align: center;">Screenshot QR di atas, lalu buka GoPay > Scan > Galeri.</p>
+    <button class="btn-kembali-gray" onclick="goHome()">Kembali</button>
+  </div>`); 
+}
 
 function bukaSosmed(){ 
   showPopup(`<div class="popup-content-general"><h2>🌐 Sosmed</h2><div class="sosmed-list">
@@ -208,6 +206,8 @@ function bukaSosmed(){
 function bukaPesan(){ 
   showPopup(`<div class="popup-content-general"><h2>💬 Kritik & Saran</h2><p>Sampaikan kritik/saranmu via WhatsApp</p><div style="margin-top:20px;"><a href="https://wa.me/6282117096372?text=Halo,%20saya%20punya%20kritik%20dan%20saran%20untuk%20web%20THE_MAGIC205..." class="sosmed-item sm-whatsapp" style="justify-content:center;">Kirim via WhatsApp</a></div><button class="btn-kembali-gray" onclick="goHome()">Kembali</button></div>`); 
 }
+
+window.onload = function(){ cariLagu('main'); }
 </script>
 </body>
 </html>
