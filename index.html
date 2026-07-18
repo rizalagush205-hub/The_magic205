@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0284c7 0%,#0ea5e9 25%,#38bdf8 60%,#e0f2fe 100%);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:12px;background-attachment:fixed;padding-bottom:40px;}
-.card{background:#0f172a;border-radius:24px;padding:26px 20px;max-width:420px;width:100%;text-align:center;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0284c7 0%,#0ea5e9 25%,#38bdf8 60%,#e0f2fe 100%);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:12px;background-attachment:fixed;}
+.card{background:#0f172a;border-radius:24px;padding:26px 20px 80px 20px;max-width:420px;width:100%;text-align:center;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative;}
 .badge{display:inline-block;background:#1e293b;color:#e2e8f0;padding:6px 14px;border-radius:18px;font-size:12px;font-weight:600;margin-bottom:16px}
 .card h1{font-size:28px;line-height:1.3;margin-bottom:6px;font-weight:700;color:#fff}
 .card h1 span{color:#93c5fd}
@@ -21,46 +21,56 @@ body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0
 .search-wrap{display:flex;gap:7px;margin-bottom:16px}
 .search-input{flex:1;padding:10px 12px;border-radius:10px;border:none;background:#1e293b;color:#fff;font-size:12px;outline:none;font-family:'Poppins'}
 .search-btn{width:40px;height:40px;border-radius:10px;border:none;background:#2563eb;color:#fff;font-size:16px;cursor:pointer}
+
+/* Scrollbar styling */
 #hasilLagu{max-height:380px;overflow-y:auto;margin-bottom:12px;text-align:left;padding-right:4px;}
-#hasilLagu::-webkit-scrollbar, .popup::-webkit-scrollbar { width: 6px; }
-#hasilLagu::-webkit-scrollbar-thumb, .popup::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+#hasilLagu::-webkit-scrollbar, .popup::-webkit-scrollbar, .popup-scroll-area::-webkit-scrollbar { width: 6px; }
+#hasilLagu::-webkit-scrollbar-thumb, .popup::-webkit-scrollbar-thumb, .popup-scroll-area::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+
 .menu-toggle{position:fixed;top:12px;left:12px;background:#0f172a;color:white;font-size:20px;width:44px;height:44px;border-radius:12px;cursor:pointer;z-index:999;display:flex;align-items:center;justify-content:center;border:none;}
-.menu-list{position:fixed;top:62px;left:12px;background:rgba(15, 23, 42, 0.95);backdrop-filter:blur(8px);padding:6px;border-radius:12px;width:160px;display:none;z-index:998;box-shadow:0 10px 25px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05)}
+.menu-list{position:fixed;top:62px;left:12px;background:rgba(15, 23, 42, 0.95);backdrop-filter:blur(8px);padding:6px;border-radius:12px;width:190px;display:none;z-index:998;box-shadow:0 10px 25px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05)}
 .menu-list.show{display:block}
 .menu-list a{display:block;color:#e2e8f0;text-decoration:none;padding:10px;margin:2px 0;font-size:13px;border-radius:8px;cursor:pointer;font-weight:600}
 .menu-list a:hover{background:rgba(255,255,255,0.08);}
-.btn-home{position:fixed;top:12px;right:12px;background:#2563eb;color:white;font-size:18px;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:999;display:none;align-items:center;justify-content:center;border:none}
-.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,#0284c7 0%,#0ea5e9 25%,#38bdf8 60%,#e0f2fe 100%);z-index:1001;overflow-y:auto;padding:24px 16px;display:none;justify-content:center;align-items:flex-start;background-attachment:fixed}
+.menu-list a.highlight { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+
+/* Popup & General Layout */
+.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,#0284c7 0%,#0ea5e9 25%,#38bdf8 60%,#e0f2fe 100%);z-index:1001;display:none;justify-content:center;align-items:center;padding:16px;background-attachment:fixed}
 .popup.show{display:flex}
-.popup.bg-dark { background: #0f172a !important; }
-.popup-box{width:100%;max-width:450px;margin:10px 0;color:#fff;text-align:center;}
-.popup-content-general { text-align: left; }
-.popup-content-general h2 {text-align:center; margin-bottom:4px; font-size:26px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.15);}
+.popup.bg-dark { background: #0c0f17 !important; }
+.popup-box{width:100%;max-width:450px;max-height:90vh;color:#fff;background:transparent;display:flex;flex-direction:column;padding-bottom:80px;position:relative;}
+
+.popup-content-general { text-align: left; width: 100%; height: 100%; display: flex; flex-direction: column; }
 .popup-content-general p {text-align:center; color:#e0f2fe; font-size:13px; margin-bottom:24px; font-weight: 500;}
 .bg-dark .popup-content-general p { color: #94a3b8; }
-.btn-kembali-gray{padding:14px 20px;background:#1e293b;border-radius:14px;font-size:14px;color:#fff;border:none;cursor:pointer;font-weight:600;margin-top:24px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: background 0.2s;}
-.btn-kembali-gray:hover { background: #334155; }
-.bg-dark .btn-kembali-gray { background: #2563eb; }
-.bg-dark .btn-kembali-gray:hover { background: #1d4ed8; }
-.player-item-new {background: transparent;padding: 16px 0;margin-bottom: 8px;position: relative;border-bottom: 1px solid rgba(255, 255, 255, 0.2);}
+
+/* Header Popup dengan Panah Kembali */
+.popup-top-bar { display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 16px; width: 100%; min-height: 44px; }
+.btn-back-top { position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 0.2s; z-index: 10; }
+.btn-back-top:hover { background: rgba(255,255,255,0.1); }
+.popup-top-bar h2 { margin: 0; font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 8px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.15); text-align: center; }
+
+.popup-header { flex-shrink: 0; padding-bottom: 4px; }
+.popup-scroll-area { flex: 1; overflow-y: auto; padding-right: 4px; margin-bottom: 8px; max-height: calc(90vh - 100px); }
+
+/* List lagu */
+.player-item-new { display: flex; align-items: center; justify-content: space-between; padding: 12px 6px; background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer; transition: background 0.2s; }
+.player-item-new:hover { background: rgba(255, 255, 255, 0.03); }
 .player-item-new:last-child { border-bottom: none; }
-.player-main-row { display: flex; align-items: flex-start; gap: 14px; }
-.player-cover {width: 54px; height: 54px; border-radius: 12px; background: #1e293b; overflow: hidden; flex-shrink: 0;box-shadow: 0 4px 12px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center;}
-.player-cover img {width: 100%;height: 100%;object-fit: cover;}
-.player-content-body { flex: 1; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-.player-info {text-align: left;}
-.player-judul { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.35; word-wrap: break-word; overflow-wrap: break-word; text-shadow: 0 1px 3px rgba(0,0,0,0.15); }
-.player-artis {font-size: 12px; color: #38bdf8; margin-top: 2px; font-weight: 500;}
+.player-main-row { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
+.player-cover { width: 48px; height: 48px; border-radius: 8px; background: #1e293b; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.player-cover img { width: 100%; height: 100%; object-fit: cover; }
+.player-content-body { flex: 1; min-width: 0; }
+.player-judul { font-size: 14px; font-weight: 500; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-item-new.active .player-judul { color: #38bdf8; }
+.player-item-new.active .player-cover { border: 2px solid #38bdf8; }
+.player-artis { font-size: 11px; color: #94a3b8; margin-top: 3px; }
 .popup:not(.bg-dark) .player-artis { color: #e0f2fe; }
-.player-controls-bottom { display: flex; align-items: center; gap: 10px; }
-.btn-play-premium {padding: 0 16px; height: 36px; border-radius: 18px; background: #2563eb; border: none; color: #fff; font-size: 12px; font-weight: 600;cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15);}
-.bg-dark .btn-play-premium { background: #1e293b; }
-.btn-play-premium:hover { transform: scale(1.04); }
-.btn-play-premium.playing { background: #ef4444 !important; }
-.btn-down-icon {padding: 0 14px; height: 36px; border-radius: 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);color: #cbd5e1; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; transition: background 0.2s;}
-.popup:not(.bg-dark) .btn-down-icon { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.25); color: #fff; }
-.btn-down-icon:hover { background: rgba(255, 255, 255, 0.15); }
-.sosmed-list { display: flex; flex-direction: column; gap: 12px; margin: 16px 0 20px; }
+.track-action-btn { background: transparent; border: none; color: #94a3b8; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; border-radius: 50%; transition: background 0.2s, color 0.2s; }
+.track-action-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+/* Sosmed List */
+.sosmed-list { display: flex; flex-direction: column; gap: 12px; margin: 8px 0 20px; }
 .sosmed-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-radius: 16px; color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; transition: transform 0.2s, filter 0.2s, box-shadow 0.2s; border: 1px solid rgba(255, 255, 255, 0.1); }
 .sosmed-item div { display: flex; align-items: center; gap: 12px; }
 .sosmed-item i.main-icon { font-size: 18px; width: 24px; text-align: center; }
@@ -72,13 +82,46 @@ body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0
 .sm-tiktok { background: #010101; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5); border: 1px solid #fe2c55; }
 .sosmed-item:hover { transform: translateY(-2px); filter: brightness(1.1); }
 .sosmed-item:hover i.arrow-icon { transform: translateX(4px); color: #fff; }
+
+/* GLOBAL MINI PLAYER */
+.mini-player-card { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-radius: 16px; padding: 12px 14px; display: none; align-items: center; justify-content: space-between; position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 24px); max-width: 420px; z-index: 2000; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.5); text-align: left; }
+.mini-player-info { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+.mini-player-cover { width: 44px; height: 44px; border-radius: 8px; background: #000; flex-shrink: 0; overflow: hidden; }
+.mini-player-cover img { width: 100%; height: 100%; object-fit: cover; }
+.mini-player-text { flex: 1; min-width: 0; }
+.mini-player-title { font-size: 13px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-player-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-player-actions { display: flex; align-items: center; gap: 4px; }
+.mini-btn { background: transparent; border: none; color: #fff; font-size: 16px; cursor: pointer; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 0.2s; }
+.mini-btn:hover { background: rgba(255, 255, 255, 0.15); }
+
+/* Progress Bar Drag & Drop */
+.mini-progress-container { position: absolute; top: -5px; left: 0; width: 100%; height: 12px; background: transparent; cursor: pointer; touch-action: none; z-index: 2010; }
+.mini-progress-bg { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: rgba(255,255,255,0.2); border-top-left-radius: 16px; border-top-right-radius: 16px; }
+.mini-progress-bar { position: absolute; bottom: 0; left: 0; height: 5px; width: 0%; background: #38bdf8; border-top-left-radius: 16px; border-top-right-radius: 16px; }
+
+/* GAYA KHUSUS: TENTANG */
+.profile-area { display: flex; flex-direction: column; align-items: center; margin-top: 4px; text-align: center; }
+.profile-img-container { width: 110px; height: 110px; border-radius: 50%; border: 3.5px solid #2563eb; padding: 4px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; background: #0f172a; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+.profile-img-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.profile-name { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 4px; letter-spacing: 0.5px; }
+.profile-sub { font-size: 13px; color: #94a3b8; font-weight: 500; }
+.divider { height: 1px; background: rgba(255, 255, 255, 0.08); width: 100%; margin: 18px 0; }
+.about-card { background: #0f172a; border-radius: 18px; padding: 20px; text-align: left; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); }
+.about-card-title { font-size: 15px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.about-card-text { font-size: 12.5px; color: #cbd5e1; line-height: 1.6; }
+.about-card-text p { margin-bottom: 12px; text-align: left; }
+.about-card-text p:last-child { margin-bottom: 0; }
 </style>
 </head>
 <body>
 
-<button class="btn-home" id="btnHome" onclick="goHome()"><i class="fa-solid fa-house"></i></button>
 <button class="menu-toggle" id="menuToggle" onclick="document.getElementById('menuList').classList.toggle('show')"><i class="fa-solid fa-bars"></i></button>
+
 <div class="menu-list" id="menuList">
+ <!-- TOMBOL DOWNLOAD APK YANG BARU DITAMBAHKAN -->
+ <a id="btnInstallApp" class="highlight" style="display:none;" onclick="prosesInstall()"><i class="fa-brands fa-android" style="margin-right:6px"></i> Download App (APK)</a>
+ 
  <a onclick="bukaDaftarLagu()"><i class="fa-solid fa-music" style="margin-right:6px"></i> Daftar Lagu</a>
  <a onclick="bukaTentang()"><i class="fa-solid fa-user" style="margin-right:6px"></i> Tentang</a>
  <a onclick="bukaSawer()"><i class="fa-solid fa-mug-hot" style="margin-right:6px"></i> Sawer</a>
@@ -100,8 +143,32 @@ body{font-family:'Poppins',Arial,sans-serif;background:linear-gradient(180deg,#0
 
 <div id="popup"></div>
 
+<!-- GLOBAL MINI PLAYER -->
+<div class="mini-player-card" id="miniPlayerBar">
+  <div class="mini-progress-container" id="progressContainer">
+    <div class="mini-progress-bg"></div>
+    <div class="mini-progress-bar" id="miniProgressBar"></div>
+  </div>
+  
+  <div class="mini-player-info">
+    <div class="mini-player-cover">
+      <img src="foto_the_magic_205.jpg" id="miniCover" alt="Logo">
+    </div>
+    <div class="mini-player-text">
+      <div class="mini-player-title" id="miniTitle">Judul Lagu</div>
+      <div class="mini-player-sub" id="miniSub">Artis • 0:00</div>
+    </div>
+  </div>
+  <div class="mini-player-actions">
+    <button class="mini-btn" onclick="playPrev()"><i class="fa-solid fa-backward-step"></i></button>
+    <button class="mini-btn" id="miniPlayBtn" onclick="togglePlay()"><i class="fa-solid fa-play"></i></button>
+    <button class="mini-btn" onclick="playNext()"><i class="fa-solid fa-forward-step"></i></button>
+  </div>
+</div>
+
 <script>
 const LOGO = "foto_the_magic_205.jpg";
+
 let daftarLagu = [
  {nama: "THE_MAGIC205 kita harus kuat.mp3", file: "THE_MAGIC205 kita harus kuat.mp3", artis: "THE_MAGIC205", durasi: "2:26"},
  {nama: "THE_MAGIC205 Keceriaan Dunia Kita.mp3", file: "THE_MAGIC205 Keceriaan Dunia Kita.mp3", artis: "THE_MAGIC205", durasi: "3:06"},
@@ -110,30 +177,81 @@ let daftarLagu = [
  {nama: "THE_MAGIC205 Sampai Garis Akhir.mp3", file: "THE_MAGIC205 Sampai Garis Akhir.mp3", artis: "THE_MAGIC205", durasi: "3:40"},
  {nama: "THE_MAGIC205 Terlahir Tak Sempurna.mp3", file: "THE_MAGIC205 Terlahir Tak Sempurna.mp3", artis: "THE_MAGIC205", durasi: "3:05"},
  {nama: "THE_MAGIC205 Menemukan Cinta di Hari Hujan.mp3", file: "THE_MAGIC205 Menemukan Cinta di Hari Hujan.mp3", artis: "THE_MAGIC205", durasi: "3:22"},
- {nama: "SAMSONS - Akhir Rasa Ini.mp3", file: "SAMSONS - Akhir Rasa Ini.mp3", artis: "", durasi: "5:00"},
- {nama: "SAMSONS - Dengan Nafasmu.mp3", file: "SAMSONS - Dengan Nafasmu.mp3", artis: "", durasi: "5:13"},
+ {nama: "SAMSONS - Akhir Rasa Ini.mp3", file: "SAMSONS - Akhir Rasa Ini.mp3", artis: "Samsons", durasi: "5:00"},
+ {nama: "SAMSONS - Dengan Nafasmu.mp3", file: "SAMSONS - Dengan Nafasmu.mp3", artis: "Samsons", durasi: "5:13"},
 ];
 
 let audioNow = new Audio();
 let currentIdx = -1;
+let sedangDigeser = false; 
+
+audioNow.onended = function() {
+    playNext();
+};
+
+audioNow.ontimeupdate = function() {
+    if (audioNow.duration && !sedangDigeser) {
+        let percent = (audioNow.currentTime / audioNow.duration) * 100;
+        let pBar = document.getElementById('miniProgressBar');
+        if(pBar) pBar.style.width = percent + '%';
+    }
+};
+
+const pContainer = document.getElementById('progressContainer');
+pContainer.addEventListener('pointerdown', (e) => {
+  sedangDigeser = true;
+  pContainer.setPointerCapture(e.pointerId); 
+  prosesGeserLagu(e);
+});
+
+pContainer.addEventListener('pointermove', (e) => {
+  if (sedangDigeser) {
+    prosesGeserLagu(e);
+  }
+});
+
+pContainer.addEventListener('pointerup', (e) => {
+  sedangDigeser = false;
+  pContainer.releasePointerCapture(e.pointerId);
+});
+
+function prosesGeserLagu(e) {
+  if (currentIdx === -1 || !audioNow.duration) return;
+  let rect = pContainer.getBoundingClientRect();
+  let x = e.clientX - rect.left;
+  x = Math.max(0, Math.min(x, rect.width)); 
+  let persentase = x / rect.width;
+  audioNow.currentTime = persentase * audioNow.duration;
+  document.getElementById('miniProgressBar').style.width = (persentase * 100) + '%';
+}
 
 function goHome(){ 
   let popupDiv = document.getElementById('popup');
-  popupDiv.innerHTML=''; popupDiv.className = ''; document.body.style.overflow='auto'; 
-  document.getElementById('menuList').classList.remove('show'); 
-  document.querySelector('.card').style.display = 'block'; 
-  document.getElementById('menuToggle').style.display = 'flex'; 
-  document.getElementById('btnHome').style.display = 'none'; 
+  if(popupDiv) { popupDiv.innerHTML=''; popupDiv.className = ''; }
+  document.body.style.overflow='auto'; 
+  let menuList = document.getElementById('menuList');
+  if(menuList) menuList.classList.remove('show'); 
+  let card = document.querySelector('.card');
+  if(card) card.style.display = 'block'; 
+  let menuToggle = document.getElementById('menuToggle');
+  if(menuToggle) menuToggle.style.display = 'flex'; 
 }
 
 function showPopup(html, isDark = false){ 
   let popupDiv = document.getElementById('popup');
+  if(!popupDiv) return;
   popupDiv.className = isDark ? 'popup show bg-dark' : 'popup show';
   popupDiv.innerHTML=`<div class="popup-box">${html}</div>`; 
-  document.body.style.overflow='hidden'; document.getElementById('menuList').classList.remove('show'); 
-  document.querySelector('.card').style.display = 'none'; 
-  document.getElementById('menuToggle').style.display = 'none'; 
-  document.getElementById('btnHome').style.display = 'flex'; 
+  document.body.style.overflow='hidden'; 
+  
+  let menuList = document.getElementById('menuList');
+  if(menuList) menuList.classList.remove('show'); 
+  
+  let card = document.querySelector('.card');
+  if(card) card.style.display = 'none'; 
+  
+  let menuToggle = document.getElementById('menuToggle');
+  if(menuToggle) menuToggle.style.display = 'none'; 
 }
 
 function cariLagu(target = 'main'){
@@ -152,62 +270,196 @@ function cariLagu(target = 'main'){
 }
 
 function buatCardLagu(lagu, idx, prefix = 'main'){
-  let isPlaying = (currentIdx === idx && !audioNow.paused);
-  return `<div class="player-item-new"><div class="player-main-row"><div class="player-cover"><img src="${LOGO}"></div><div class="player-content-body"><div class="player-info"><div class="player-judul">${lagu.nama.replace('.mp3','')}</div><div class="player-artis">${lagu.artis}</div></div><div class="player-controls-bottom"><button class="btn-play-premium ${isPlaying ? 'playing' : ''}" onclick="playLagu(${idx})" id="${prefix}-btnPlay-${idx}"><i class="fa-solid ${isPlaying? 'fa-pause' : 'fa-play'}"></i> <span>${isPlaying ? 'Pause' : 'Putar'}</span></button><button class="btn-down-icon" onclick="unduhLaguPaksa(event, '${lagu.file}', '${lagu.nama}')"><i class="fa-solid fa-download"></i></button></div></div></div></div>`;
+  let activeClass = (currentIdx === idx) ? 'active' : '';
+  let namaArtis = lagu.artis ? lagu.artis : "Artis tidak dikenal";
+  return `
+    <div class="player-item-new ${activeClass}" onclick="playLagu(${idx})">
+      <div class="player-main-row">
+        <div class="player-cover">
+          <img src="${LOGO}" alt="Cover">
+        </div>
+        <div class="player-content-body">
+          <div class="player-judul">${lagu.nama.replace('.mp3','')}</div>
+          <div class="player-artis">${namaArtis} • ${lagu.durasi}</div>
+        </div>
+      </div>
+      <button class="track-action-btn" onclick="unduhLaguPaksa(event, '${lagu.file}', '${lagu.nama}')">
+        <i class="fa-solid fa-download" style="font-size:14px;"></i>
+      </button>
+    </div>
+  `;
+}
+
+function updateAllList() {
+  cariLagu('main');
+  if (document.getElementById('popupSearchInput')) {
+    cariLagu('popup');
+  }
 }
 
 function playLagu(idx){
- if(currentIdx === idx){ audioNow.paused? audioNow.play() : audioNow.pause(); } 
- else { audioNow.pause(); currentIdx = idx; audioNow.src = daftarLagu[idx].file; audioNow.play(); }
- setTimeout(updateAllList, 100);
+ if(currentIdx === idx){ 
+    audioNow.paused ? audioNow.play() : audioNow.pause(); 
+ } else { 
+    audioNow.pause(); 
+    currentIdx = idx; 
+    audioNow.src = daftarLagu[idx].file; 
+    audioNow.play(); 
+ }
+ updateAllList();
+ updateMiniPlayer();
 }
 
-function updateAllList() { 
-  daftarLagu.forEach((lagu, idx) => { 
-      let btn = document.getElementById('main-btnPlay-'+idx) || document.getElementById('popup-btnPlay-'+idx);
-      let isPlaying = (currentIdx === idx && !audioNow.paused);
-      if(btn) btn.innerHTML = `<i class="fa-solid ${isPlaying ? 'fa-pause' : 'fa-play'}"></i> <span>${isPlaying ? 'Pause' : 'Putar'}</span>`;
-  }); 
+function togglePlay() {
+  if (currentIdx !== -1) {
+    audioNow.paused ? audioNow.play() : audioNow.pause();
+    updateAllList();
+    updateMiniPlayer();
+  }
+}
+
+function playNext() {
+  if (currentIdx === -1) return;
+  if (currentIdx < daftarLagu.length - 1) {
+    playLagu(currentIdx + 1);
+  } else {
+    playLagu(0);
+  }
+}
+
+function playPrev() {
+  if (currentIdx === -1) return;
+  if (currentIdx > 0) {
+    playLagu(currentIdx - 1);
+  } else {
+    playLagu(daftarLagu.length - 1);
+  }
+}
+
+function updateMiniPlayer() {
+  let miniBar = document.getElementById('miniPlayerBar');
+  if (!miniBar) return;
+  if (currentIdx === -1) { miniBar.style.display = 'none'; return; }
+  
+  miniBar.style.display = 'flex';
+  let lagu = daftarLagu[currentIdx];
+  let namaArtis = lagu.artis ? lagu.artis : "Artis tidak dikenal";
+  
+  let miniCoverImg = document.getElementById('miniCover');
+  if (miniCoverImg) miniCoverImg.src = LOGO;
+
+  let titleEl = document.getElementById('miniTitle');
+  if(titleEl) titleEl.innerText = lagu.nama.replace('.mp3','');
+  
+  let subEl = document.getElementById('miniSub');
+  if(subEl) subEl.innerText = `${namaArtis} • ${lagu.durasi}`;
+  
+  let playBtn = document.getElementById('miniPlayBtn');
+  if (playBtn) {
+    if (audioNow.paused) {
+      playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+    } else {
+      playBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+    }
+  }
 }
 
 function unduhLaguPaksa(event, url, namaFile) {
-  fetch(url).then(res => res.blob()).then(blob => {
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = namaFile; a.click();
-  });
+  if(event) event.stopPropagation();
+  let konfirmasi = confirm(`Apakah Anda ingin mendownload lagu "${namaFile.replace('.mp3','')}"?`);
+  if(!konfirmasi) return;
+  fetch(url).then(res => {
+      if (!res.ok) throw new Error('Gagal mengambil file.');
+      return res.blob();
+    }).then(blob => {
+      const a = document.createElement('a'); 
+      a.href = URL.createObjectURL(blob); 
+      a.download = namaFile; 
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }).catch(err => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.download = namaFile;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
 }
 
 function bukaDaftarLagu(){ 
-  showPopup(`<div class="popup-content-general"><h2>Daftar Lagu</h2><div class="search-wrap"><input type="text" class="search-input" id="popupSearchInput" placeholder="Cari..." oninput="cariLagu('popup')"></div><div id="popupHasilLagu"></div><button class="btn-kembali-gray" onclick="goHome()">Kembali</button></div>`, true); 
+  showPopup(`<div class="popup-content-general"><div class="popup-header"><div class="popup-top-bar"><button class="btn-back-top" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button><h2>Daftar Lagu</h2></div><div class="search-wrap" style="margin-top: 12px; margin-bottom: 4px;"><input type="text" class="search-input" id="popupSearchInput" placeholder="Cari..." oninput="cariLagu('popup')"></div></div><div class="popup-scroll-area"><div id="popupHasilLagu"></div></div></div>`, true); 
   cariLagu('popup');
 }
-
-function bukaTentang(){ showPopup(`<div class="popup-content-general"><h2>Tentang</h2><p>THE_MAGIC205 - Musik AI Independen</p><button class="btn-kembali-gray" onclick="goHome()">Kembali</button></div>`); }
-
+function bukaTentang(){ 
+  showPopup(`<div class="popup-content-general"><div class="popup-top-bar"><button class="btn-back-top" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button><h2>Tentang</h2></div><div class="popup-scroll-area"><div class="profile-area"><div class="profile-img-container"><img src="${LOGO}" alt="THE_MAGIC205"></div><div class="profile-name">THE_MAGIC205</div><div class="profile-sub">Musisi Indie • Pekanbaru</div></div><div class="divider"></div><div class="about-card"><div class="about-card-title"><i class="fa-solid fa-address-card"></i> Tentang Project</div><div class="about-card-text"><p>Halo! Saya adalah kreator di balik project musik THE_MAGIC205. Menggabungkan seni musik tradisional/modern dengan sentuhan kecerdasan buatan (AI) untuk menciptakan karya yang unik dan ceria.</p><p>Seluruh musik yang tersedia di sini dapat diputar bebas dan didownload gratis kapan saja. Terima kasih banyak atas apresiasi dan kunjungan teman-teman!</p></div></div></div></div>`, true); 
+}
 function bukaSawer(){ 
-  showPopup(`<div class="popup-content-general">
-    <h2>☕ Sawer</h2>
-    <p>Terima kasih dukungannya!</p>
-    <img src="gopay-qr.jpg" style="width: 100%; border-radius: 12px; margin-bottom: 10px; border: 3px solid #00AA13;">
-    <p style="font-size: 12px; color: #fff; text-align: center;">Screenshot QR di atas, lalu buka GoPay > Scan > Galeri.</p>
-    <button class="btn-kembali-gray" onclick="goHome()">Kembali</button>
-  </div>`); 
+  showPopup(`<div class="popup-content-general"><div class="popup-top-bar"><button class="btn-back-top" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button><h2>☕ Sawer</h2></div><div class="popup-scroll-area"><p>Terima kasih dukungannya!</p><img src="gopay-qr.jpg" style="width: 100%; border-radius: 12px; margin-bottom: 10px; border: 3px solid #00AA13;"><p style="font-size: 12px; color: #fff; text-align: center;">Screenshot QR di atas, lalu buka GoPay > Scan > Galeri.</p></div></div>`); 
 }
-
 function bukaSosmed(){ 
-  showPopup(`<div class="popup-content-general"><h2>🌐 Sosmed</h2><div class="sosmed-list">
-    <a href="https://wa.me/6282117096372?text=Halo%20THE_MAGIC205" class="sosmed-item sm-whatsapp"><div><i class="fa-brands fa-whatsapp main-icon"></i> WhatsApp</div><i class="fa-solid fa-angle-right"></i></a>
-    <a href="https://www.youtube.com/@THE_magic_205" class="sosmed-item sm-youtube"><div><i class="fa-brands fa-youtube main-icon"></i> YouTube</div><i class="fa-solid fa-angle-right"></i></a>
-    <a href="https://www.instagram.com/the_magic205" class="sosmed-item sm-instagram"><div><i class="fa-brands fa-instagram main-icon"></i> Instagram</div><i class="fa-solid fa-angle-right"></i></a>
-    <a href="https://www.facebook.com/share/1HSXQDpDzx/" target="_blank" rel="noopener noreferrer" class="sosmed-item sm-facebook"><div><i class="fa-brands fa-facebook main-icon"></i> Facebook</div><i class="fa-solid fa-angle-right"></i></a>
-    <a href="https://www.tiktok.com/@the_magic95?_r=1&_t=ZS-985yPpe6FF6" target="_blank" rel="noopener noreferrer" class="sosmed-item sm-tiktok"><div><i class="fa-brands fa-tiktok main-icon"></i> TikTok</div><i class="fa-solid fa-angle-right"></i></a>
-  </div><button class="btn-kembali-gray" onclick="goHome()">Kembali</button></div>`); 
+  showPopup(`<div class="popup-content-general"><div class="popup-top-bar"><button class="btn-back-top" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button><h2>🌐 Sosmed</h2></div><div class="popup-scroll-area"><div class="sosmed-list"><a href="https://wa.me/6282117096372?text=Halo%20THE_MAGIC205" class="sosmed-item sm-whatsapp"><div><i class="fa-brands fa-whatsapp main-icon"></i> WhatsApp</div><i class="fa-solid fa-angle-right"></i></a><a href="https://www.youtube.com/@THE_magic_205" class="sosmed-item sm-youtube"><div><i class="fa-brands fa-youtube main-icon"></i> YouTube</div><i class="fa-solid fa-angle-right"></i></a><a href="https://www.instagram.com/the_magic205" class="sosmed-item sm-instagram"><div><i class="fa-brands fa-instagram main-icon"></i> Instagram</div><i class="fa-solid fa-angle-right"></i></a><a href="https://www.facebook.com/share/1HSXQDpDzx/" target="_blank" rel="noopener noreferrer" class="sosmed-item sm-facebook"><div><i class="fa-brands fa-facebook main-icon"></i> Facebook</div><i class="fa-solid fa-angle-right"></i></a><a href="https://www.tiktok.com/@the_magic95?_r=1&_t=ZS-985yPpe6FF6" target="_blank" rel="noopener noreferrer" class="sosmed-item sm-tiktok"><div><i class="fa-brands fa-tiktok main-icon"></i> TikTok</div><i class="fa-solid fa-angle-right"></i></a></div></div></div>`); 
 }
-
 function bukaPesan(){ 
-  showPopup(`<div class="popup-content-general"><h2>💬 Kritik & Saran</h2><p>Sampaikan kritik/saranmu via WhatsApp</p><div style="margin-top:20px;"><a href="https://wa.me/6282117096372?text=Halo,%20saya%20punya%20kritik%20dan%20saran%20untuk%20web%20THE_MAGIC205..." class="sosmed-item sm-whatsapp" style="justify-content:center;">Kirim via WhatsApp</a></div><button class="btn-kembali-gray" onclick="goHome()">Kembali</button></div>`); 
+  showPopup(`<div class="popup-content-general"><div class="popup-top-bar"><button class="btn-back-top" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button><h2>💬 Kritik & Saran</h2></div><div class="popup-scroll-area"><p>Sampaikan kritik/saranmu via WhatsApp</p><div style="margin-top:20px;"><a href="https://wa.me/6282117096372?text=Halo,%20saya%20punya%20kritik%20dan%20saran%20untuk%20web%20THE_MAGIC205..." class="sosmed-item sm-whatsapp" style="justify-content:center;">Kirim via WhatsApp</a></div></div></div>`); 
 }
 
-window.onload = function(){ cariLagu('main'); }
+window.onload = function(){ cariLagu('main'); updateMiniPlayer(); }
+
+// ==========================================
+// KODE UNTUK FITUR DOWNLOAD APK (PWA INSTALL)
+// ==========================================
+let deferredPrompt;
+
+// Menangkap event ketika browser siap menawarkan instalasi
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Mencegah Chrome lama agar tidak langsung memunculkan prompt
+  e.preventDefault();
+  // Simpan event sehingga bisa dipicu nanti
+  deferredPrompt = e;
+  
+  // Tampilkan tombol "Download App (APK)" di dalam Menu
+  const installBtn = document.getElementById('btnInstallApp');
+  if (installBtn) {
+    installBtn.style.display = 'block';
+  }
+});
+
+// Fungsi saat tombol "Download App" diklik
+function prosesInstall() {
+  if (deferredPrompt) {
+    // Tampilkan prompt bawaan browser (Tambahkan ke Layar Utama)
+    deferredPrompt.prompt();
+    
+    // Tunggu pilihan user
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User menerima instalasi PWA');
+      } else {
+        console.log('User menolak instalasi PWA');
+      }
+      // Reset variabel karena prompt cuma bisa dipanggil sekali
+      deferredPrompt = null;
+      
+      // Sembunyikan tombol setelah diklik dan popup ditutup
+      document.getElementById('btnInstallApp').style.display = 'none';
+      document.getElementById('menuList').classList.remove('show');
+    });
+  }
+}
 </script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((reg) => console.log('PWA: Service Worker berhasil didaftarkan!'))
+        .catch((err) => console.log('PWA: Service Worker gagal didaftarkan', err));
+    });
+  }
+</script>
+
 </body>
 </html>
